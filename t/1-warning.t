@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 # $File: /local/member/autrijus/encoding-warnings//t/1-warning.t $ $Author: autrijus $
-# $Revision: #4 $ $Change: 3557 $ $DateTime: 2004-03-14T14:30:00.950648Z $
+# $Revision: #5 $ $Change: 3574 $ $DateTime: 2004-03-14T16:50:39.261078Z $
 
 use Test;
 BEGIN { plan tests => 2 }
@@ -17,8 +17,7 @@ if ($] < 5.008) {
 my ($a, $b, $c, $ok);
 
 $SIG{__WARN__} = sub {
-    $ok = 1 if $_[0] =~ /upgraded/;
-    ok($ok); exit;
+    if ($_[0] =~ /upgraded/) { ok(1); exit }
 };
 
 utf8::encode($a = chr(20000));

@@ -1,4 +1,12 @@
 ----------------------------------------------------------------------
+r3571:  autrijus | 2004-03-14T16:44:12.257367Z
+
+* This be 0.02.
+* Added lots of documentations, as well as explained the subtlety of
+  "use encoding" better.  Prompted by Ton Hospel.
+* Do not bother decoding a string twice if it is us-ascii.
+
+----------------------------------------------------------------------
 r3555:  autrijus | 2004-03-14T14:28:26.152968Z
 
 * 0.01, initial release on CPAN.

@@ -2,7 +2,7 @@
 # $Revision: #14 $ $Change: 4137 $ $DateTime: 2003/02/08 11:41:59 $
 
 package encoding::warnings;
-$VERSION = '0.01';
+$encoding::warnings::VERSION = '0.02';
 
 use strict;
 
@@ -45,7 +45,8 @@ this line on top of your main program:
 
 Afterwards, implicit upgrading of high-bit bytes will raise a warning.
 Ex.: C<Bytes implicitly upgraded into wide characters as iso-8859-1 at
-- line 7>.
+- line 7>.  Note that byte strings composed purely of ASCII code points
+(C<0x00>..C<0x7F>) will I<not> trigger this warning.
 
 You can also make the warnings fatal by importing this module as:
 
@@ -54,7 +55,7 @@ You can also make the warnings fatal by importing this module as:
 =head2 Solving the problem
 
 Most of the time, this warning occurs when a byte-string is concatenated
-with a unicode-string.  There are a number of ways to solve it
+with a unicode-string.  There are a number of ways to solve it:
 
 =over 4
 
@@ -68,7 +69,8 @@ L<perlfunc/binmode> for how.
 =item * Downgrade both sides to byte-strings
 
 The other way works too, especially if you are sure that all your data
-are under the same encoding, or compatibility with older perls is desired.
+are under the same encoding, or if compatibility with older perls is
+desired.
 
 You may downgrade strings with C<Encode::encode> and C<utf8::encode>.
 See L<Encode> and L<utf8> for details.
@@ -85,6 +87,42 @@ Similarly, this will silence warnings from this module, and preserve the
 default behaviour:
 
     use encoding 'iso-8859-1';
+
+However, note that C<use encoding> actually had three distinct effects:
+
+=over 4
+
+=item * PerlIO layers for STDIN and STDOUT
+
+This is similar to what L<open> pragma does.
+
+=item * Literal Conversions
+
+This turns I<all> literal string in your program into unicode-strings
+(equivalent to a C<use utf8>), by decoding them using the specified encoding
+
+=item * Implicit upgrading for byte strings
+
+This will silence warnings from this module, as shown above.
+
+=back
+
+Because literal conversions work on empty strings, it may surprise
+some people:
+
+    use encoding 'big5';
+
+    my $byte_string = pack("C*", 0xA4, 0x40);
+    print length $a;	# 2 here.
+    $a .= "";		# concatenating with a unicode string...
+    print length $a;	# 1 here!
+
+In other words, do not C<use encoding> unless you are certain that the
+program will not deal with any raw, 8-bit binary data at all.
+
+However, the C<Filter =E<gt> 1> flavor of C<use encoding> will I<not>
+affect implicit upgrading for byte strings, and so is incapable of
+silencing warnings from this module.
 
 =back
 
@@ -105,6 +143,7 @@ sub import {
     my $class = shift;
     my $fatal = shift || '';
 
+    local $@;
     return if ${^ENCODING} and ref(${^ENCODING}) ne $class;
     return unless eval { require Encode; 1 };
 
@@ -135,14 +174,14 @@ sub decode {
     my $self = shift;
 
     local $@;
-    eval { $self->[ASCII]->decode($_[0], Encode::FB_CROAK()); 1 };
-    if ($@) {
-	require Carp;
-	no strict 'refs';
-	$self->[FATAL]->(
-	    "Bytes implicitly upgraded into wide characters as iso-8859-1"
-	);
-    }
+    my $rv = eval { $self->[ASCII]->decode($_[0], Encode::FB_CROAK()) };
+    return $rv unless $@;
+
+    require Carp;
+    no strict 'refs';
+    $self->[FATAL]->(
+	"Bytes implicitly upgraded into wide characters as iso-8859-1"
+    );
     return $self->[LATIN1]->decode(@_);
 }
 

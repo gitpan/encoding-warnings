@@ -1,5 +1,5 @@
 name: encoding-warnings
-version: 0.01
+version: 0.02
 abstract: Warn on implicit encoding conversions
 author: Autrijus Tang <autrijus@autrijus.org>
 license: perl
