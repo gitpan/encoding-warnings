@@ -14,9 +14,9 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 4adafabd12be40db13efc23ebd9db7d5a4f356e8 Changes
+SHA1 659ae3a17834fb9341a06fb7c4d3544d35874ac6 Changes
 SHA1 e47c1c7cfc008d6aa2d5076c6a8def72f62211ed MANIFEST
-SHA1 93085e3d7464033b38a77247045abbd8101faf29 META.yml
+SHA1 7ac6fb1ace1e23a8b3793404dc0a0c9f7cb0129b META.yml
 SHA1 8df049c2785fa3746591015fba79b2ccd2e586aa Makefile.PL
 SHA1 bb7ecf5bed19e3ce950655b3ab9b126ec1e3f1ab README
 SHA1 8ce7e929153133eb824fa71678a28952dc251848 inc/Module/Install.pm
@@ -27,7 +27,7 @@ SHA1 eff0614c9c10b5965b1c8c6f81ba4b222a30bb13 inc/Module/Install/Makefile.pm
 SHA1 96622a9c708604cf36d5f44b6fbff26b050e4c9d inc/Module/Install/Metadata.pm
 SHA1 f08018c1a76a07671910d05f06885aaa807ffce1 inc/Module/Install/Win32.pm
 SHA1 ab45068dc0f749d438705201e38d7901df0c824b inc/Module/Install/WriteAll.pm
-SHA1 e3bc38d83e7a11967b6a60d2b1dd02d384b4d408 lib/encoding/warnings.pm
+SHA1 562024097b09d946e3850b536c6a72bb9c742837 lib/encoding/warnings.pm
 SHA1 616c2cb24ec3f61e2b8c66bdb39227893ff6de52 t/0-signature.t
 SHA1 ba9f53bad0b53e5f9b6e567990db630a40c8c81e t/1-warning.t
 SHA1 d144c3c7e2018e00afd705c465d7a9e69bde7e0e t/2-fatal.t
@@ -35,7 +35,7 @@ SHA1 c127b93c3982b94883f74b232f4465420ecc7d41 t/3-normal.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.2.3 (FreeBSD)
 
-iD8DBQFAVI2VtLPdNzw1AaARAoAFAKCwfbtnCYhEgKMOrQN9OIHQyONUTACeMBpv
-q5qOBLkl8UbmJE46E1YywOw=
-=rkft
+iD8DBQFAVZzYtLPdNzw1AaARAlS9AKCpN8AavMS/+KJEyXya88JBKZS80QCgmtna
+XBGv+uBV2vZ/tCGNcLVATqo=
+=jfhs
 -----END PGP SIGNATURE-----

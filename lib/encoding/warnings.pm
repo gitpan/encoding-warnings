@@ -2,7 +2,7 @@
 # $Revision: #14 $ $Change: 4137 $ $DateTime: 2003/02/08 11:41:59 $
 
 package encoding::warnings;
-$encoding::warnings::VERSION = '0.02';
+$encoding::warnings::VERSION = '0.03';
 
 use strict;
 
@@ -14,10 +14,10 @@ encoding::warnings - Warn on implicit encoding conversions
 
     use encoding::warnings; # or 'FATAL' to raise fatal exceptions
 
-    utf8::encode($a = chr(20000));  # a byte string
-    $b = chr(20000);		    # a unicode string
+    utf8::encode($a = chr(20000));  # a byte-string (raw bytes)
+    $b = chr(20000);		    # a unicode-string (wide characters)
 
-    # Bytes implicitly upgraded into wide characters as iso-8859-1"
+    # "Bytes implicitly upgraded into wide characters as iso-8859-1"
     $c = $a . $b;
 
 =head1 DESCRIPTION
@@ -25,13 +25,13 @@ encoding::warnings - Warn on implicit encoding conversions
 =head2 Overview of the problem
 
 By default, there is a fundamental asymmetry in Perl's unicode model:
-implicit upgrading from byte strings to Unicode strings assumes that
-they were encoded in I<ISO 8859-1 (Latin-1)>, but Unicode strings are
+implicit upgrading from byte-strings to unicode-strings assumes that
+they were encoded in I<ISO 8859-1 (Latin-1)>, but unicode-strings are
 downgraded with UTF-8 encoding.  This happens because the first 256
 codepoints in Unicode happens to agree with Latin-1.  
 
 However, this silent upgrading can easily cause problems, if you happen
-to mix unicode strings with non-latin1 data -- i.e. byte strings encoded
+to mix unicode strings with non-Latin1 data -- i.e. byte-strings encoded
 in UTF-8 or other encodings.  The error will not manifest until the
 combined string is written to output, at which time it would be impossible
 to see where did the silent upgrading occur.
@@ -45,7 +45,7 @@ this line on top of your main program:
 
 Afterwards, implicit upgrading of high-bit bytes will raise a warning.
 Ex.: C<Bytes implicitly upgraded into wide characters as iso-8859-1 at
-- line 7>.  Note that byte strings composed purely of ASCII code points
+- line 7>.  Note that strings composed purely of ASCII code points
 (C<0x00>..C<0x7F>) will I<not> trigger this warning.
 
 You can also make the warnings fatal by importing this module as:
@@ -62,15 +62,15 @@ with a unicode-string.  There are a number of ways to solve it:
 =item * Upgrade both sides to unicode-strings
 
 If your program does not need compatibility for Perl 5.6 and earlier,
-the recommended approach is to apply appropriate IO disciplines so all
-data in your program are unicode strings.  See L<encoding>, L<open> and
+the recommended approach is to apply appropriate IO disciplines, so all
+data in your program become unicode-strings.  See L<encoding>, L<open> and
 L<perlfunc/binmode> for how.
 
 =item * Downgrade both sides to byte-strings
 
 The other way works too, especially if you are sure that all your data
-are under the same encoding, or if compatibility with older perls is
-desired.
+are under the same encoding, or if compatibility with older versions
+of Perl is desired.
 
 You may downgrade strings with C<Encode::encode> and C<utf8::encode>.
 See L<Encode> and L<utf8> for details.
@@ -78,8 +78,8 @@ See L<Encode> and L<utf8> for details.
 =item * Specify the encoding for implicit byte-string upgrading
 
 If you are confident that all byte-strings will be in a specific
-encoding like UTF-8, I<and> need not to support older perls, use the
-C<encoding> pragma:
+encoding like UTF-8, I<and> need not support older versions of Perl,
+use the C<encoding> pragma:
 
     use encoding 'utf8';
 
@@ -96,12 +96,12 @@ However, note that C<use encoding> actually had three distinct effects:
 
 This is similar to what L<open> pragma does.
 
-=item * Literal Conversions
+=item * Literal conversions
 
 This turns I<all> literal string in your program into unicode-strings
 (equivalent to a C<use utf8>), by decoding them using the specified encoding
 
-=item * Implicit upgrading for byte strings
+=item * Implicit upgrading for byte-strings
 
 This will silence warnings from this module, as shown above.
 
@@ -121,7 +121,7 @@ In other words, do not C<use encoding> unless you are certain that the
 program will not deal with any raw, 8-bit binary data at all.
 
 However, the C<Filter =E<gt> 1> flavor of C<use encoding> will I<not>
-affect implicit upgrading for byte strings, and so is incapable of
+affect implicit upgrading for byte-strings, and so is incapable of
 silencing warnings from this module.
 
 =back
@@ -138,7 +138,7 @@ sub ASCII  () { 0 }
 sub LATIN1 () { 1 }
 sub FATAL  () { 2 }
 
-# Install a ^ENCODING handler if no other one are already in place.
+# Install a ${^ENCODING} handler if no other one are already in place.
 sub import {
     my $class = shift;
     my $fatal = shift || '';
