@@ -2,13 +2,18 @@
 # $Revision: #14 $ $Change: 4137 $ $DateTime: 2003/02/08 11:41:59 $
 
 package encoding::warnings;
-$encoding::warnings::VERSION = '0.03';
+$encoding::warnings::VERSION = '0.04';
 
 use strict;
 
 =head1 NAME
 
 encoding::warnings - Warn on implicit encoding conversions
+
+=head1 VERSION
+
+This document describes version 0.04 of encoding::warnings, released
+March 28, 2004.
 
 =head1 SYNOPSIS
 
@@ -45,8 +50,10 @@ this line on top of your main program:
 
 Afterwards, implicit upgrading of high-bit bytes will raise a warning.
 Ex.: C<Bytes implicitly upgraded into wide characters as iso-8859-1 at
-- line 7>.  Note that strings composed purely of ASCII code points
-(C<0x00>..C<0x7F>) will I<not> trigger this warning.
+- line 7>.
+
+However, strings composed purely of ASCII code points (C<0x00>..C<0x7F>)
+will I<not> trigger this warning.
 
 You can also make the warnings fatal by importing this module as:
 
@@ -92,14 +99,15 @@ However, note that C<use encoding> actually had three distinct effects:
 
 =over 4
 
-=item * PerlIO layers for STDIN and STDOUT
+=item * PerlIO layers for B<STDIN> and B<STDOUT>
 
 This is similar to what L<open> pragma does.
 
 =item * Literal conversions
 
 This turns I<all> literal string in your program into unicode-strings
-(equivalent to a C<use utf8>), by decoding them using the specified encoding
+(equivalent to a C<use utf8>), by decoding them using the specified
+encoding.
 
 =item * Implicit upgrading for byte-strings
 
@@ -107,7 +115,7 @@ This will silence warnings from this module, as shown above.
 
 =back
 
-Because literal conversions work on empty strings, it may surprise
+Because literal conversions also work on empty strings, it may surprise
 some people:
 
     use encoding 'big5';
@@ -121,15 +129,16 @@ In other words, do not C<use encoding> unless you are certain that the
 program will not deal with any raw, 8-bit binary data at all.
 
 However, the C<Filter =E<gt> 1> flavor of C<use encoding> will I<not>
-affect implicit upgrading for byte-strings, and so is incapable of
-silencing warnings from this module.
+affect implicit upgrading for byte-strings, and is thus incapable of
+silencing warnings from this module.  See L<encoding> for more details.
 
 =back
 
 =head1 CAVEATS
 
-The module currently affects the whole script, instead of inside its
-lexical block.  This is expected to be addressed during Perl 5.9 development.
+This module currently affects the whole script, instead of inside its
+lexical block.  This is expected to be addressed during Perl 5.9 development,
+where the B<encoding> module will also be made lexical.
 
 =cut
 

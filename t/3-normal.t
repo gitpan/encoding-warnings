@@ -1,6 +1,6 @@
 #!/usr/bin/perl
-# $File: /local/member/autrijus/encoding-warnings//t/3-normal.t $ $Author: autrijus $
-# $Revision: #4 $ $Change: 3557 $ $DateTime: 2004-03-14T14:30:00.950648Z $
+# $File: /member/local/autrijus/encoding-warnings/t/3-normal.t $ $Author: autrijus $
+# $Revision: #3 $ $Change: 1625 $ $DateTime: 2004-03-14T16:50:26.012462Z $
 
 use Test;
 BEGIN { plan tests => 2 }

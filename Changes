@@ -1,4 +1,11 @@
 ----------------------------------------------------------------------
+r1632 (orig r1613):  autrijus | 2004-03-16T13:18:41.208832Z
+
+* This be 0.04, from the YAPC::Taipei::2004 release party.
+* Various POD grammar updates.
+* Mentions that we will be making encoding.pm to be lexical during 5.9.
+
+----------------------------------------------------------------------
 r3589:  autrijus | 2004-03-15T12:08:20.409836Z
 
 * This be 0.03.
