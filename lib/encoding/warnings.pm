@@ -2,7 +2,7 @@
 # $Revision: #14 $ $Change: 4137 $ $DateTime: 2003/02/08 11:41:59 $
 
 package encoding::warnings;
-$encoding::warnings::VERSION = '0.04';
+$encoding::warnings::VERSION = '0.05';
 
 use strict;
 
@@ -12,8 +12,8 @@ encoding::warnings - Warn on implicit encoding conversions
 
 =head1 VERSION
 
-This document describes version 0.04 of encoding::warnings, released
-March 28, 2004.
+This document describes version 0.05 of encoding::warnings, released
+July 15, 2004.
 
 =head1 SYNOPSIS
 
@@ -193,6 +193,8 @@ sub decode {
     );
     return $self->[LATIN1]->decode(@_);
 }
+
+sub name { 'iso-8859-1' }
 
 1;
 

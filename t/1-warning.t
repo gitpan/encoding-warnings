@@ -1,6 +1,6 @@
 #!/usr/bin/perl
-# $File: /member/local/autrijus/encoding-warnings/t/1-warning.t $ $Author: autrijus $
-# $Revision: #4 $ $Change: 1626 $ $DateTime: 2004-03-14T16:53:19.351256Z $
+# $File: /member/local/autrijus/encoding-warnings//t/1-warning.t $ $Author: autrijus $
+# $Revision: #5 $ $Change: 6145 $ $DateTime: 2004-07-16T03:49:06.717424Z $
 
 use Test;
 BEGIN { plan tests => 2 }
@@ -25,3 +25,5 @@ $b = chr(20000);
 $c = $a . $b;
 
 ok($ok);
+
+__END__
