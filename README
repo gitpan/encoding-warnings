@@ -1,0 +1,28 @@
+# $File: /local/member/autrijus/encoding-warnings//README $ $Author: autrijus $
+# $Revision: #4 $ $Change: 3557 $ $Date: 2004-03-14T14:30:00.950648Z $
+
+This is the README file for encoding::warnings, a module to
+ease detection of "implicit encoding conversions" in Perl 5.8.0
+and later.
+
+Please type "perldoc encoding::warnings" after installation to see
+the module usage information.
+
+* Installation
+
+encoding::warnings uses the standard perl module install process:
+
+cpansign -v		# optional; see SIGNATURE for details
+perl Makefile.PL
+make			# or 'nmake' on Win32
+make test
+make install
+
+* Copyright
+
+Copyright 2004 by Autrijus Tang <autrijus@autrijus.org>.
+
+All rights reserved.  You can redistribute and/or modify
+this bundle under the same terms as Perl itself.
+
+See <http://www.perl.com/perl/misc/Artistic.html>.
