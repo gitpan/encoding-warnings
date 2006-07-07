@@ -1,19 +1,24 @@
+[Changes for 0.10 - 2006-07-07]
+
+* This module is now lexical for Perl 5.9.4 and later.
+  Requested by: Rafael Garcia-Suarez
+
 ----------------------------------------------------------------------
-r1632 (orig r1613):  autrijus | 2004-03-16T13:18:41.208832Z
+r1632 (orig r1613):  audreyt | 2004-03-16T13:18:41.208832Z
 
 * This be 0.04, from the YAPC::Taipei::2004 release party.
 * Various POD grammar updates.
 * Mentions that we will be making encoding.pm to be lexical during 5.9.
 
 ----------------------------------------------------------------------
-r3589:  autrijus | 2004-03-15T12:08:20.409836Z
+r3589:  audreyt | 2004-03-15T12:08:20.409836Z
 
 * This be 0.03.
 * Fixes various typo and punctuations.
 * Unified terminology to use "byte-string" and "unicode-string".
 
 ----------------------------------------------------------------------
-r3571:  autrijus | 2004-03-14T16:44:12.257367Z
+r3571:  audreyt | 2004-03-14T16:44:12.257367Z
 
 * This be 0.02.
 * Added lots of documentations, as well as explained the subtlety of
@@ -21,7 +26,7 @@ r3571:  autrijus | 2004-03-14T16:44:12.257367Z
 * Do not bother decoding a string twice if it is us-ascii.
 
 ----------------------------------------------------------------------
-r3555:  autrijus | 2004-03-14T14:28:26.152968Z
+r3555:  audreyt | 2004-03-14T14:28:26.152968Z
 
 * 0.01, initial release on CPAN.
 ----------------------------------------------------------------------

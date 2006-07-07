@@ -1,7 +1,3 @@
-#!/usr/bin/perl
-# $File: /member/local/autrijus/encoding-warnings//t/1-warning.t $ $Author: autrijus $
-# $Revision: #5 $ $Change: 6145 $ $DateTime: 2004-07-16T03:49:06.717424Z $
-
 use Test;
 BEGIN { plan tests => 2 }
 
